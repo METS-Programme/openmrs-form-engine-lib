@@ -36,7 +36,7 @@ const OHRITextArea: React.FC<OHRIFormFieldProps> = ({ question, onChange, handle
   };
 
   useEffect(() => {
-    getConceptNameAndUUID(question.questionOptions.concept).then(conceptTooltip => {
+    getConceptNameAndUUID(question.questionOptions.concept).then((conceptTooltip) => {
       setConceptName(conceptTooltip);
     });
   }, [conceptName]);

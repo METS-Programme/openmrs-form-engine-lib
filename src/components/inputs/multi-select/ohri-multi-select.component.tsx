@@ -42,7 +42,7 @@ export const OHRIMultiSelect: React.FC<OHRIFormFieldProps> = ({ question, onChan
   }, [question['submission']]);
 
   const questionItems = question.questionOptions.answers
-    .filter(answer => !answer.isHidden)
+    .filter((answer) => !answer.isHidden)
     .map((answer, index) => ({
       id: `${question.id}-${answer.concept}`,
       concept: answer.concept,
@@ -51,7 +51,7 @@ export const OHRIMultiSelect: React.FC<OHRIFormFieldProps> = ({ question, onChan
     }));
 
   const initiallySelectedQuestionItems = [];
-  questionItems.forEach(item => {
+  questionItems.forEach((item) => {
     if (field.value?.includes(item.concept)) {
       initiallySelectedQuestionItems.push(item);
     }
@@ -59,14 +59,14 @@ export const OHRIMultiSelect: React.FC<OHRIFormFieldProps> = ({ question, onChan
 
   const handleSelectItemsChange = ({ selectedItems }) => {
     setTouched(true);
-    const value = selectedItems.map(selectedItem => selectedItem.concept);
+    const value = selectedItems.map((selectedItem) => selectedItem.concept);
     setFieldValue(question.id, value);
     onChange(question.id, value, setErrors, setWarnings);
     question.value = handler?.handleFieldSubmission(question, value, encounterContext);
   };
 
   useEffect(() => {
-    getConceptNameAndUUID(question.questionOptions.concept).then(conceptTooltip => {
+    getConceptNameAndUUID(question.questionOptions.concept).then((conceptTooltip) => {
       setConceptName(conceptTooltip);
     });
   }, [conceptName]);
@@ -105,7 +105,7 @@ export const OHRIMultiSelect: React.FC<OHRIFormFieldProps> = ({ question, onChan
             label={''}
             titleText={question.label}
             key={counter}
-            itemToString={item => (item ? item.label : ' ')}
+            itemToString={(item) => (item ? item.label : ' ')}
             disabled={question.disabled}
             invalid={!isFieldRequiredError && errors.length > 0}
             invalidText={errors[0]?.message}
@@ -117,7 +117,7 @@ export const OHRIMultiSelect: React.FC<OHRIFormFieldProps> = ({ question, onChan
         <div className={styles.formField} style={{ marginTop: '0.125rem' }}>
           {field.value?.length ? (
             <UnorderedList className={styles.list}>
-              {handler?.getDisplayValue(question, field.value)?.map(displayValue => displayValue + ', ')}
+              {handler?.getDisplayValue(question, field.value)?.map((displayValue) => displayValue + ', ')}
             </UnorderedList>
           ) : (
             <OHRIValueEmpty />

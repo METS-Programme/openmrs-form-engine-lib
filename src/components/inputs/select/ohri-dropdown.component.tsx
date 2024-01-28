@@ -27,24 +27,26 @@ const OHRIDropdown: React.FC<OHRIFormFieldProps> = ({ question, onChange, handle
     }
   }, [question['submission']]);
 
-  const handleChange = value => {
+  const handleChange = (value) => {
     setFieldValue(question.id, value);
     onChange(question.id, value, setErrors, setWarnings);
     question.value = handler?.handleFieldSubmission(question, value, encounterContext);
   };
 
-  const itemToString = item => {
-    const answer = question.questionOptions.answers.find(opt => (opt.value ? opt.value == item : opt.concept == item));
+  const itemToString = (item) => {
+    const answer = question.questionOptions.answers.find((opt) =>
+      opt.value ? opt.value == item : opt.concept == item,
+    );
     return answer?.label;
   };
   useEffect(() => {
     setItems(
-      question.questionOptions.answers.filter(answer => !answer.isHidden).map(item => item.value || item.concept),
+      question.questionOptions.answers.filter((answer) => !answer.isHidden).map((item) => item.value || item.concept),
     );
   }, [question.questionOptions.answers]);
 
   useEffect(() => {
-    getConceptNameAndUUID(question.questionOptions.concept).then(conceptTooltip => {
+    getConceptNameAndUUID(question.questionOptions.concept).then((conceptTooltip) => {
       setConceptName(conceptTooltip);
     });
   }, [conceptName]);
@@ -81,8 +83,8 @@ const OHRIDropdown: React.FC<OHRIFormFieldProps> = ({ question, onChange, handle
             titleText={question.label}
             label="Choose an option"
             items={question.questionOptions.answers
-              .filter(answer => !answer.isHidden)
-              .map(item => item.value || item.concept)}
+              .filter((answer) => !answer.isHidden)
+              .map((item) => item.value || item.concept)}
             itemToString={itemToString}
             selectedItem={field.value}
             onChange={({ selectedItem }) => handleChange(selectedItem)}

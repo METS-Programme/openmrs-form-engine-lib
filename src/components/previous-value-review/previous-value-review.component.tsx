@@ -22,7 +22,7 @@ export const PreviousValueReview: React.FC<Props> = ({ value, displayText, setVa
         <Button
           className={styles.reuseButton}
           kind="ghost"
-          onClick={e => {
+          onClick={(e) => {
             e.preventDefault();
             setValue(value);
           }}>

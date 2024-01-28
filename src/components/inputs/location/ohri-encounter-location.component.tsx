@@ -18,20 +18,15 @@ export const OHRIEncounterLocationPicker: React.FC<{ question: OHRIFormField; on
 
   useEffect(() => {
     if (question.questionOptions.locationTag) {
-      getLocationsByTag(
-        question.questionOptions.locationTag
-          .trim()
-          .split(' ')
-          .join('%20'),
-      ).subscribe(
-        results => setLocations(results),
-        error => createErrorHandler(),
+      getLocationsByTag(question.questionOptions.locationTag.trim().split(' ').join('%20')).subscribe(
+        (results) => setLocations(results),
+        (error) => createErrorHandler(),
       );
     }
   }, []);
 
   useEffect(() => {
-    getConceptNameAndUUID(question.questionOptions.concept).then(conceptTooltip => {
+    getConceptNameAndUUID(question.questionOptions.concept).then((conceptTooltip) => {
       setConceptName(conceptTooltip);
     });
   }, [conceptName]);
@@ -53,7 +48,7 @@ export const OHRIEncounterLocationPicker: React.FC<{ question: OHRIFormField; on
           titleText={question.label}
           label="Choose location"
           items={locations}
-          itemToString={item => item.display}
+          itemToString={(item) => item.display}
           selectedItem={field.value}
           onChange={({ selectedItem }) => {
             setFieldValue(question.id, selectedItem);

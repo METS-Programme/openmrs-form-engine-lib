@@ -19,7 +19,7 @@ export const OHRIValueDisplay = ({ value }) => {
 const OHRIListDisplay = ({ valueArray }) => {
   return (
     <ul>
-      {valueArray.map(item => (
+      {valueArray.map((item) => (
         <li className={styles.item}>{item}</li>
       ))}
     </ul>

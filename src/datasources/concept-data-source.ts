@@ -14,7 +14,7 @@ export class ConceptDataSource extends BaseOpenMRSDataSource {
       } else {
         return openmrsFetch(searchTerm ? `${this.url}&q=${searchTerm}` : this.url).then(({ data }) => {
           return data.results.filter(
-            concept => concept.conceptClass && config.class.includes(concept.conceptClass.uuid),
+            (concept) => concept.conceptClass && config.class.includes(concept.conceptClass.uuid),
           );
         });
       }
